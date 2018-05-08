@@ -1,0 +1,17 @@
+	<div id="wrapper">
+
+	<%= notice%>
+	<%= alert%>
+	<h1 style="text-align: center !important;">Edit article</h1>
+	 
+	<%= render 'form' %>
+
+	 <% if user_signed_in? %>
+	  <button>	<%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></button>
+	  <%= link_to current_user.email, edit_user_registration_path %></button>
+	<% else %>
+	  <button><%= link_to 'Sign In', new_user_session_path %></button>
+	  <button><%= link_to 'Sign Up', new_user_registration_path %></button>
+	<% end %>
+	<%= link_to 'Back', articles_path %>
+	</div>

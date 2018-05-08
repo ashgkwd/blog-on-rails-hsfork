@@ -1,0 +1,45 @@
+<head>
+ <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+</head>
+<body>
+<center>
+ <div id="wrapper">
+<h1>Project</h1>
+ <%= link_to 'New article', new_article_path %>
+ <br>
+ <%= notice%>
+ <%= alert%>
+<table>
+  <tr>
+    <th>Project Name</th>
+    <th>Languages</th>
+    <th>Description</th>
+  </tr>
+ 
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.project %></td>
+      <td><%= article.languages %></td>
+      <td><%= article.description %></td>
+      <td><%= link_to 'Show', article_path(article) %></td>
+      <% if article.user&.email %>
+        <td>
+          <i class="fas fa-user"></i>
+        </td>
+      <% end %>
+      </tr>
+  <% end %>
+</table>
+
+
+
+<% if user_signed_in? %>
+  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+  <%= link_to current_user.email, edit_user_registration_path %>
+<% else %>
+  <%= link_to 'Sign In', new_user_session_path %>
+  <%= link_to 'Sign Up', new_user_registration_path %>
+<% end %>
+</div>
+</center>
+</body>

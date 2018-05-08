@@ -1,0 +1,60 @@
+  <div id="wrapper">
+  
+    <%= notice%>
+    <%= alert%>
+    <center>
+      <h2>
+        <%= @article.project %>
+      </h2>
+    </center>  
+
+    <div class="row">
+      <div class="col-md-8 space-out">
+        <p>
+          <strong>Languages:</strong>
+          <%= @article.languages %>
+        </p>
+        
+        <p>
+          <strong>Description:</strong>
+          <%= @article.description %>
+        </p>
+        
+        <p>
+          <strong>Created at:</strong>
+          <%= @article.created_at %>
+        </p>
+        
+        <% if @article.user&.email %>
+          <p>
+            <strong>Created at:</strong>
+            <%= @article.user&.email  %>
+          </p>
+          <% end %>
+      </div>
+      <div class="col-md-4">
+        <center class="space-out">
+          <img src=<%= @article.image.url :large %> />
+        </center>
+      </div>
+    </div>
+
+    
+
+    <center class="space-out">
+      <% if user_signed_in? %>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+      <%= link_to current_user.email, edit_user_registration_path %>
+    <% else %>
+      <%= link_to 'Sign In', new_user_session_path %>
+      <%= link_to 'Sign Up', new_user_registration_path %>
+    <% end %>
+    <%if true || policy(@article).edit? %>
+      <%= link_to 'Edit', edit_article_path(@article) %> 
+      <%= link_to 'Destroy', article_path(@article),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <%= link_to 'Back', articles_path if true || policy(@article).create? %>
+    </center>
+  </div>
